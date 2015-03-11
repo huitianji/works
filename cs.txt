@@ -1,2 +1,20 @@
-xxxx
-ceshi 0002
+echo # works >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/huitianji/works.git
+git push -u origin master
+
+
+
+
+// 在本地 master 分支上做了一个commit ( 38361a68138140827b31b72f8bbfd88b3705d77a ) ， 如何把它放到 本地 old_cc 分支上？
+用git cherry-pick xxx
+
+$ git checkout old_cc
+$ git cherry-pick 38361a68     # 这个 38361a68 号码，位于：
+
+$ git log //master
+commit 38361a68138140827b31b72f8bbfd88b3705d77a 
+Author: Siwei Shen <siwei.shen@focusbeijing.com>
+Date:   Sat Dec 10 00:09:44 2011 +0800
