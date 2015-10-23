@@ -72,7 +72,7 @@ git log --oneline --graph
 
 ########  版本的回退
 ### 回退到上一个版本
-git reset --hard HEAD^
+git reset --hard HEAD^    //commitguo
 
 恢复：
 git reset --hard  id
@@ -86,16 +86,34 @@ git log --oneline --grep='add-diff'
 > index.html 清空文件
 
 回退修改的:
-git reset --hard HEAD  //清除修改的。。
+git reset --hard HEAD  //清除修改的。。 用历史区覆盖暂存区工作区
 干净
 
-git reset --mixed HEAD  //清除绿色的
+git reset --mixed HEAD  //清除绿色的  只覆盖暂存区不覆盖工作区
 
 
 ###回退修改
-git checkout -- 文件名
+git checkout -- 文件名  从暂存区回退到工作区
 
+### dev->master
+git merge dev
 
+##删除分支
+git branch -d <dev>
+##创建+创建分支
+git checkout -b <name>
+
+##git stash  把当前的工作区暂存区，保存到一个固定的地方。并且用最新的版本覆盖当前区
+
+git stash list
+
+git stash apply 恢复，但恢复后，stash内容不删除
+git stash pop 恢复的同时，把stash里面的内容删掉
+
+###远程仓库
+ssh-keygen -t rsa -C "邮箱名字"
+
+cd ~/.ssh
 
 
 
