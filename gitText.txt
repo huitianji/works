@@ -1,0 +1,110 @@
+换行符
+window  \r\n
+linux mac  \n
+
+#创建目录
+mkdir 目录名
+#删除目录
+rm -rf 目录名
+
+pwd 显示当前的目录
+
+查看隐藏目录 ls -al
+
+初始库  git init
+
+修改名字：
+git config --local user.name "jht"
+
+输出： 一个大于号>表示清空 然后加上
+       两个大于号 >>表示追加
+echo 1 > index.html
+
+
+#查看文件：
+cat 文件名字
+
+
+esc
+:wq!退出次编辑并保存
+
+:q! 直接退出
+
+返回上一层
+cd ..
+
+touch 1
+
+vim
+先输入 i 进入编辑模式
+add 1
+esc
+shift + :  +wq!
+完成
+
+###
+git status -s
+第一列绿色字母含义：暂存区和版本库中的文件改动
+第二列红色字母含义：工作区和暂存区文件的改动
+
+git diff  查看内容的差异 工作区与暂存区
+
+git diff HEAD 工作区与历史区的区别
+git diff --cached  历史区与暂存区
+
+###
+git log -1 --pretty=raw
+最后一次提交
+
+git cat-file -t id
+git cat-file -p id   //-p把文本显示出来
+
+# 看暂存区里面的文件
+git ls-files
+
+git log --graph
+
+###
+git log --oneline
+版本
+git log --oneline --graph
+
+
+########  版本的回退
+### 回退到上一个版本
+git reset --hard HEAD^
+
+恢复：
+git reset --hard  id
+
+#查看。。。。
+git reflog
+
+#提交日志进行过滤
+git log --oneline --grep='add-diff'
+
+> index.html 清空文件
+
+回退修改的:
+git reset --hard HEAD  //清除修改的。。
+干净
+
+git reset --mixed HEAD  //清除绿色的
+
+
+###回退修改
+git checkout -- 文件名
+
+
+
+
+
+
+
+
+
+
+
+
+
+
