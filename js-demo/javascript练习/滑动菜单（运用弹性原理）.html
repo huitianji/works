@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+	body,ul,li{ margin:0px; padding:0px;}
+	#ul { width:400px; margin:20px auto; position:relative;}
+	#ul li { width:98px; height:28px; line-height:28px; border:1px solid #ccc; float:left; list-style:none; z-index:2; position:relative;}
+	#ul li#bg{ position:absolute; width:100px; top:24px; height:5px; background-color:red; left:0px; z-index:1; overflow:hidden; border:none;}
+</style>
+<script>
+	/*
+		弹性函数封装
+	*/
+	var iSpeed=0;
+	var left=0;
+	function startMove(obj,iTarget){
+		clearInterval(obj.timer);
+		obj.timer=setInterval(function(){
+			//弹性公式
+			iSpeed +=(iTarget-obj.offsetLeft)/5; 
+			iSpeed *=0.7;//摩擦力
+			
+			left+=iSpeed;
+			if(Math.abs(iSpeed)<1&&Math.abs(left-iTarget)<1){
+				clearInterval(obj.timer);
+				obj.style.left=iTarget+"px";
+			}else{
+				obj.style.left=left+"px";
+			}
+			//document.title=obj.style.left;
+		},30);
+	}
+	//测试
+window.onload=function(){
+	var oUl=document.getElementById("ul");
+	var oLi=oUl.getElementsByTagName("li");
+	var oBg=oLi[oLi.length-1];
+	for(var i=0;i<oLi.length-1;i++){
+		oLi[i].onmouseover=function(){
+			startMove(oBg,this.offsetLeft);
+		}
+	}
+}
+</script>
+</head>
+
+<body>
+<ul id="ul">
+    <li>首页</li>
+    <li>首页首页</li>
+    <li>无标题</li>
+    <li>这是这是</li>
+    <li id="bg"></li>
+</ul>
+</body>
+</html>

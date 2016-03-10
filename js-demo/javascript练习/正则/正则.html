@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<textarea id="txt1"  cols="30" style="height:100px;"></textarea><br>
+<input type="button" id="btn" value="过滤"><br>
+<textarea id="txt2" cols="30" style="height:100px;"></textarea>
+<script>
+	//alert(window.navigator.userAgent);
+	var txt1=document.getElementById("txt1");
+	var txt2=document.getElementById("txt2");
+	var btn=document.getElementById("btn");
+	btn.onclick=function(){
+		var reg = /我们|你们/g;
+		//
+		txt2.value=txt1.value.replace(reg,"***");
+	}
+	
+	// <[^<>]+>代表许多个任意字符
+	
+	//   \w ==  [0-9a-z_]
+	//   \s  space 空格
+	
+	//   \D  [^0-9]
+	//   \W   [^0-9a-z_]
+	//   \S   除了空格以外的字符
+</script>
+<script>
+	var str="  sfdf faf faf  ";
+	var reg=/^\s+|\s+$/g;
+	alert("("+str.replace(reg,"")+")");
+</script>
+</body>
+</html>

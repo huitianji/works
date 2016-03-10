@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        img{ width: 36px; height: 36px; position: relative;}
+    </style>
+    <script>
+    window.onload=function(){
+        var aImg=document.getElementsByTagName("img");
+        var oDate=new Date();
+        var prevStr=toZero(oDate.getHours())+toZero(oDate.getMinutes())+toZero(oDate.getSeconds());
+        //console.log(prevStr);
+        var nextStr="";
+        var arr=[];
+        var time=null;
+        for(var i=0;i<aImg.length;i++){
+            aImg[i].src="images/"+prevStr.charAt(i)+".jpg";
+        }
+        setInterval(toChange,1000);
+        function toChange(){
+            var oDate=new Date();
+            nextStr=toZero(oDate.getHours())+toZero(oDate.getMinutes())+toZero(oDate.getSeconds());
+            //console.log(nextStr);
+            toCom(prevStr,nextStr);
+            prevStr=nextStr;
+        }
+        function toCom(str1,str2){
+            arr=[];
+            for(var i=0;i<str1.length;i++){
+                if(str1.charAt(i)!=str2.charAt(i)){
+                    arr.push(i);
+                }
+            }
+            startMove();
+        }
+        function startMove(){
+            clearInterval(time);
+            var iSpeed=-4;
+            time=setInterval(function(){
+                for(var i=0;i<arr.length;i++){
+                    if(aImg[arr[i]].offsetHeight==0){
+                        iSpeed=4;
+                    }
+                    aImg[arr[i]].src="images/"+nextStr.charAt(arr[i])+".jpg";
+                    aImg[arr[i]].style.height=aImg[arr[i]].offsetHeight+iSpeed+"px";
+                    aImg[arr[i]].style.top=aImg[arr[i]].offsetHeight/2-18+"px";
+                    if(aImg[arr[i]].offsetHeight==36){
+                        clearInterval(time);
+                    }
+                }
+            },30)
+
+        }
+        function toZero(num){
+            if(num<10){
+                return "0"+num;
+            }else{
+                return ""+num;
+            }
+        }
+
+    }
+    </script>
+</head>
+<body>
+<div id="div1">
+    <img src="images/1.jpg">
+    <img src="images/2.jpg">:
+    <img src="images/3.jpg">
+    <img src="images/4.jpg">:
+    <img src="images/5.jpg">
+    <img src="images/6.jpg">
+</div>
+
+</body>
+</html>

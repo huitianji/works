@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<div id="oDiv" style="width:100px; height:100px; background-color:red;"></div>
+<script>
+	/*
+		测试
+	*/
+	function myAddEvent(obj,sEvent,fn){
+		if(obj.attachEvent){
+			obj.attachEvent("on"+sEvent,fn);
+		}else{
+			obj.addEventListener(sEvent,fn,false);
+		}
+	}
+	//
+	var oDiv=document.getElementById("oDiv");
+	//myAddEvent(oDiv,"click",function(){alert(1)});
+	//oDiv.attachEvent("onclick",function(){alert(this==window)});//ie里面 
+	oDiv.addEventListener("click",function(){ console.log(this);},false);//this指的是div  这是chore
+	
+	//解除事件绑定
+	//IE  detachEvent;
+	//ff   removeEventListener
+</script>
+</body>
+</html>

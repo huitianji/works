@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+        body,ul,li,div{ padding: 0px; margin-top: 0px;}
+        body{ width: 500px; margin: 20px auto;}
+        #suggest{ border: 1px solid #ccc; position: absolute; top: 50px; width:152px; display: none;}
+        ul li { height: 20px; line-height: 20px; border-bottom: 1px solid #ccc;}
+        .active { background-color: red;}
+    </style>
+</head>
+<body>
+<div class="detail">
+    <input id="input1" type="text">
+    <ul id="suggest">
+        <li class="note">请选择</li>
+        <li email="" class="item"></li>
+        <li email="@163.com" class="item">@163.com</li>
+        <li email="@sina.com" class="item">@sina.com</li>
+        <li email="@qq.com" class="item">@qq.com</li>
+        <li email="@126.com" class="item">@126.com</li>
+        <li email="@sohu.com" class="item">@sohu.com</li>
+    </ul>
+</div>
+<script>
+window.onload = function(){
+    var s1 = new Suggest();
+    s1.init();//初始化程序
+}
+function Suggest(){
+    this.oInput = document.getElementById("input1");
+    this.oUl = document.getElementById("suggest");
+    this.aLi =  this.oUl.getElementsByTagName("li");
+}
+Suggest.prototype = {
+    init:function() {
+        this.toChange();
+        this.toBlur();
+    },
+    toChange:function() {
+        //ie:onpropertychange;
+        //w3c:oninput//连续触发
+        var ie = !-[1,];
+        var This = this;
+        if(ie){
+            this.oInput.onpropertychange = function() {
+                if(This.oInput.value == ""){
+                    This.tips();
+                    return;
+                }
+                This.showUl();
+                This.tips();
+                This.sel(1);
+            }
+        }else{
+            this.oInput.oninput = function() {
+                This.showUl();
+                This.tips();
+                This.sel(1);
+            }
+        }
+    },
+    showUl:function() {
+        this.oUl.style.display = "block";
+    },
+    toBlur:function() {
+        var This = this;
+        this.oInput.onblur = function() {
+            This.oUl.style.display = "none";
+        }
+    },
+    tips:function() {
+        var value = this.oInput.value;
+        var re = new RegExp("@"+value.substring(value.indexOf("@")+1));
+       // console.log(re);
+        for(var i= 0,length = this.aLi.length;i<length;i++){
+            this.aLi[i].style.display = "block";
+        }
+        if(re.test(value)){
+            for(var i= 1,length = this.aLi.length;i<length;i++){
+                var oEmail = this.aLi[i].getAttribute("email");
+                if(re.test(oEmail)){
+                    this.aLi[i].style.display = "block";
+                }else{
+                    this.aLi[i].style.display = "none";
+                }
+            }
+        }else{
+            for(var i= 1,length = this.aLi.length;i<length;i++){
+                var oEmail = this.aLi[i].getAttribute("email");
+                if(!oEmail){
+                    this.aLi[i].innerHTML = value;
+                }else{
+                    this.aLi[i].innerHTML = value + oEmail;
+                }
+            }
+        }
+    },
+    sel: function(iNow) {
+        var This = this;
+        for(var i= 0,length = this.aLi.length;i<length; i++){
+            this.aLi[i].className = "item";
+        }
+        if(this.oInput.value == ""){
+            this.aLi[iNow].className ="item";
+        }else{
+            this.aLi[iNow].className ="active";
+        }
+        for(var i= 1,length = this.aLi.length;i<length; i++){
+            this.aLi[i].index = i;
+            this.aLi[i].onmouseover = function () {
+                for(var i= 1,length = This.aLi.length;i<length; i++){
+                    This.aLi[i].className = "item";
+                }
+                this.className = "active";
+                iNow = this.index;
+            };
+            this.aLi[i].onmousedown = function(){
+                This.oInput.value = this.innerHTML;
+            }
+        }
+        this.oInput.onkeydown = function(ev) {
+            var ev = ev || window.event;
+            if(ev.keyCode == 38){//上
+                if(iNow == 1){
+                    iNow =This.aLi.length -1;
+                }else{
+                    iNow --;
+                }
+                for(var i= 1,length = This.aLi.length;i<length; i++){
+                    This.aLi[i].className = "item";
+                }
+                This.aLi[iNow].className = "active";
+
+            }else if(ev.keyCode == 40){//下
+                if(iNow == This.aLi.length -1){
+                    iNow =1;
+                }else{
+                    iNow ++;
+                }
+                for(var i= 1,length = This.aLi.length;i<length; i++){
+                    This.aLi[i].className = "item";
+                }
+                This.aLi[iNow].className = "active";
+            }else if(ev.keyCode == 13){//回车
+                This.oInput.value = This.aLi[iNow].innerHTML;
+                this.blur();
+            }
+        }
+    }
+}
+</script>
+</body>
+</html>

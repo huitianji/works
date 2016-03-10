@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+	#oDiv{width:100px; height:100px; background-color:red; position:absolute; z-index:1;}
+	#oDiv2{width:100px; height:100px; background-color:yellow; position:absolute; left:400px; top:200px;}
+</style>
+</head>
+
+<body>
+<div id="oDiv"></div>
+<div id="oDiv2"></div>
+<script>
+	
+window.onload=function(){
+	var oDiv=document.getElementById("oDiv");
+	var oDi2v=document.getElementById("oDiv2");
+	oDiv.onmousedown=function(ev){
+		var oEvent=ev || event;
+		var disX=oEvent.clientX-oDiv.offsetLeft;
+		var disY=oEvent.clientY-oDiv.offsetTop;
+		document.onmousemove=function(ev){
+			var oEvent=ev || event;
+			oDiv.style.left=oEvent.clientX-disX+"px";
+			oDiv.style.top=oEvent.clientY-disY+"px";
+			
+			var l1=oDiv.offsetLeft;
+			var r1=oDiv.offsetLeft+oDiv.offsetWidth;
+			var t1=oDiv.offsetTop;
+			var b1=oDiv.offsetTop+oDiv.offsetHeight;
+			
+			var l2=oDiv2.offsetLeft;
+			var r2=oDiv2.offsetLeft+oDiv2.offsetWidth;
+			var t2=oDiv2.offsetTop;
+			var b2=oDiv2.offsetTop+oDiv2.offsetHeight;
+			if(l2>r1 || l1>r2 || t2>b1 || t1>b2){
+				oDiv2.style.background="yellow";
+			}else{
+				oDiv2.style.background="green";
+			}
+			
+			
+		}
+		document.onmouseup=function(){
+			document.onmousemove=null;
+			document.onmouseup=null;
+		}
+		return false;
+	}
+}
+</script>
+</body>
+</html>

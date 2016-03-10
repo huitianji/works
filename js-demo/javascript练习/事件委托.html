@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+
+</head>
+
+<body>
+<input type="button" id="btn" value="添加">
+<ul id="oul">
+	<li>1111</li>
+    <li>2222</li>
+    <li>3333</li>
+    <li>4444</li>
+</ul>
+<script>
+window.onload=function(){
+	var oUl=document.getElementById("oul");
+	var btn=document.getElementById("btn");
+	var iNow=4;
+	oUl.onmouseover=function(ev){
+		var ev = ev || window.event;
+		var target= ev.target || ev.srcElement;
+		if(target.nodeName.toLowerCase()=="li"){
+			target.style.background="red";
+		}
+		//console.log(target.nodeName.toLowerCase()=="li");
+	}
+	oUl.onmouseout=function(ev){
+		var ev = ev || window.event;
+		var target= ev.target || ev.srcElement;
+		if(target.nodeName.toLowerCase()=="li"){
+			target.style.background="";
+		}
+	}
+	btn.onclick=function(){
+		iNow++;
+		var oLi=document.createElement("li");
+		oLi.innerHTML=1111*iNow;
+		oUl.appendChild(oLi);
+	}
+}
+</script>
+</body>
+</html>

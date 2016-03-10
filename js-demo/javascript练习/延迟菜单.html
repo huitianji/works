@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+        li{ list-style: none; border: 1px solid #000;}
+        .container{ width: 800px; margin:0px auto; border: 1px solid #ff0000;}
+        ul li{float: left; position: relative; padding: 0px 20px 0px 0px;}
+        .float_layer{ display: block; border: 1px solid #ff0000; height: 28px; line-height: 28px; border-radius: 3px; position: absolute; top: 28px; width: 245px;}
+        .active{ color:red; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <ul>
+        <li>
+            <a class="normal active" href="####">首页</a>
+            <span class="float_layer">
+                <a href="####">11111</a>
+                <a href="####">11111</a>
+                <a href="####">11111</a>
+            </span>
+        </li>
+        <li>
+            <a class="normal" href="####">导航</a>
+            <span class="float_layer">
+                <a href="####">222</a>
+                <a href="####">2222</a>
+                <a href="####">2222</a>
+            </span>
+        </li>
+        <li>
+            <a class="normal" href="####">菜单</a>
+            <span class="float_layer">
+                <a href="####">33333</a>
+                <a href="####">33333</a>
+                <a href="####">33333</a>
+            </span>
+        </li>
+    </ul>
+</div>
+
+
+<script>
+//getByClass
+function getByClass(oParent,oClass){
+    var aEle=document.getElementsByTagName("*");
+    var result=[];
+    var re=new RegExp("\\b"+oClass+"\\b",'i');
+    for(var i= 0,length=aEle.length;i<length;i++){
+        if(re.test(aEle[i].className)){
+            result.push(aEle[i])
+        }
+    }
+    return result;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function(){
+	var btn=document.getElementById("btn");
+	btn.onclick=function(){
+		//window.parent.document.getElementById("aa").style.color="red";
+		//alert(1);
+		window.top.document.getElementById("bb").style.color="red";
+	}
+}
+</script>
+</head>
+
+<body>
+<input type="button" id="btn" value="按钮">
+</body>
+</html>

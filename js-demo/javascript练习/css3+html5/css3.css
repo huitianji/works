@@ -1,0 +1,70 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+    -webkit-user-select: none;
+}
+
+#webkit-tip {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    -webkit-transform: scale(0);
+}            
+
+body {
+    margin: 0;
+    padding: 0;
+    background: black;
+}
+#wrap {
+    -webkit-perspective: 500;
+    width: 200px;
+    height: 200px;
+    margin: 100px auto;
+}
+#cube,.face {
+    width: 100%;
+    height: 100%;
+    -webkit-transform-origin: 50% 50% 0;
+}
+#cube {
+    -webkit-transform-style: preserve-3d;
+    -webkit-transform: rotateY(70deg);
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.4);
+}
+.face {
+    position: absolute;
+    text-align: center;
+    line-height: 200px;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 微软雅黑;
+}
+#face-front {
+    background-color: #339966;
+    -webkit-transform: translateZ(100px);
+}
+#face-back {
+    background-color: #993399;
+    -webkit-transform: translateZ(-100px);
+}
+#face-top {
+    background-color: #FF9933;
+    -webkit-transform:translateY(-100px) rotateX(90deg);
+}
+#face-bottom {
+    background-color: #3366FF;
+    -webkit-transform:translateY(100px) rotateX(90deg);
+}
+#face-left {
+    background-color: rgba(0, 0, 255, 1);
+    -webkit-transform:translateX(-100px) rotateY(90deg);
+}
+#face-right {
+    background-color: rgba(255, 255, 0, 1);
+    -webkit-transform:translateX(100px) rotateY(90deg);
+}
+

@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+	#div1 { width:200px; height:200px; background-color:red;}
+</style>
+</head>
+
+<body style="height:1200px;">
+<div id="div1">
+</div>
+<script>
+	/*
+		封装一个通用函数事件
+	*/
+	function myAddEvent(obj,sEvent,fn){
+		if(obj.attachEvent){
+			obj.attachEvent("on"+sEvent,fn);
+		}else{
+			obj.addEventListener(sEvent,fn,false);
+		}
+	}
+	window.onload=function(){
+		var oDiv=document.getElementById("div1");
+
+		function onMouseWheel(ev){
+			var oEvent=ev || event; 
+			// IE  chrom
+			//wheelDelta 上 正
+			//-----------下 负 
+			//火狐下  detail  上   负
+			//---------------下   正
+			//alert(oEvent.wheelDelta);//ie下wheelDelta
+			var bDown=true;
+			bDown=oEvent.wheelDelta?oEvent.wheelDelta<0:oEvent.detail>0;
+			
+			if(bDown){
+				oDiv.style.height=oDiv.offsetHeight+10+"px";
+			}else{
+				oDiv.style.height=oDiv.offsetHeight-10+"px";
+			}
+			if(oEvent.preventDefault){
+				oEvent.preventDefault();
+			}
+			return false;
+		}				 
+		myAddEvent(oDiv,"mousewheel",onMouseWheel);
+		myAddEvent(oDiv,"DOMMouseScroll",onMouseWheel);
+	}
+</script>
+</body>
+</html>

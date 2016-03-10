@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+	#oDiv{width:100px; height:100px; background-color:yellow; position:absolute;}
+	.div2{ position:absolute; border:1px dashed #000;}
+</style>
+</head>
+
+<body>
+<div id="oDiv"></div>
+<script>
+	
+window.onload=function(){
+	var oDiv=document.getElementById("oDiv");
+	oDiv.onmousedown=function(ev){
+		var oEvent=ev || event;
+		var disX=oEvent.clientX-oDiv.offsetLeft;
+		var disY=oEvent.clientY-oDiv.offsetTop;
+		var newDiv=document.createElement("div");
+		newDiv.className="div2";
+		newDiv.style.width=oDiv.offsetWidth-2+"px";
+		newDiv.style.height=oDiv.offsetHeight-2+"px";
+		
+		newDiv.style.left=oDiv.offsetLeft+"px";
+		newDiv.style.top=oDiv.offsetTop+"px";
+		document.body.appendChild(newDiv);
+		document.onmousemove=function(ev){
+			var oEvent=ev || event;
+			newDiv.style.left=oEvent.clientX-disX+"px";
+			newDiv.style.top=oEvent.clientY-disY+"px";
+		}
+		document.onmouseup=function(){
+			document.onmousemove=null;
+			document.onmouseup=null;
+			
+			oDiv.style.left=newDiv.style.left;
+			oDiv.style.top=newDiv.style.top;
+			document.body.removeChild(newDiv);
+		}
+		return false;
+	}
+}
+</script>
+</body>
+</html>

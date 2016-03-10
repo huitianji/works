@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+       body{ width: 500px; margin:20px auto;}
+        #div1 {}
+       #div1 p { text-align: right; width: 300px; color:#FF00FF;}
+        #div1 a { display: block; width: 50px; height: 25px; line-height: 25px; border: 1px solid #000;
+            text-align: center; text-decoration: none; color: #000;}
+       #div1 a.dis{ border: 1px solid #ccc; color: #ccc;}
+       #div1 textarea { width: 300px; height: 70px; }
+    </style>
+</head>
+<body>
+<div id="div1">
+    <p>意见征求</p>
+    <textarea></textarea>
+    <a class="dis" href="####">提交</a>
+</div>
+<script>
+window.onload=function(){
+    var oDiv = document.getElementById("div1");
+    var oP = oDiv.getElementsByTagName("p")[0];
+    var oT = oDiv.getElementsByTagName("textarea")[0];
+    var oA = oDiv.getElementsByTagName("a")[0];
+
+    var Bbtn=true;
+    var ie = !-[1,];
+    var timer = null;
+    var iNow = 0;
+    //onchange:当我输入完光标消失的时候才触发一次
+    //连续触发 IE：onpropertychange;
+    //连续触发 w3c：oninput;
+    //很简单的判断是不是ＩＥ：!-[1,]
+    oT.onfocus = function(){
+        if(Bbtn){
+            oP.innerHTML = "还可以输入<span>50</span>个字";
+            Bbtn = false;
+            oP.style.color = "#000";
+        }
+    }
+    oT.onblur = function(){
+        if(oT.value == ""){
+            oP.innerHTML = "意见征求";
+            Bbtn = true;
+            oP.style.color = "#FF00FF";
+        }
+    }
+    if(ie){
+        oT.onpropertychange = toChange;
+    }else{
+        oT.oninput = toChange;
+    }
+    function toChange(){
+        var num = Math.ceil(getLength(oT.value)/2);
+        var span = oDiv.getElementsByTagName("span")[0];
+        if(num <= 50){
+            span.innerHTML = 50 - num;
+            span.style.color = "";
+        }else{
+            span.innerHTML = num -50;
+            span.style.color = "red";
+        }
+        if(oT.value == "" || num > 50){
+            oA.className = "dis";
+        }else{
+            oA.className = "";
+        }
+    }
+    //单字节 0-255;\x00-\xff; 例：a b都是单字节；汉子是双字节
+    function getLength(str){
+        //return str.toString().replace(/[^\x00-\xff]/,"aa")
+        return String(str).replace(/[^\x00-\xff]/g,"aa").length;
+    }
+    //提交
+    oA.onclick = function(){
+        if(this.className == "dis"){
+            clearInterval(timer);
+            timer = setInterval(function(){
+                if(iNow == 5){
+                    clearInterval(timer);
+                    iNow = 0;
+                }else{
+                    iNow ++;
+                }
+                if(iNow%2){
+                    oT.style.backgroundColor = "red";
+                }else{
+                    oT.style.backgroundColor = "";
+                }
+            },100)
+        }else{
+            alert("提交成功");
+        }
+    }
+}
+
+//var t="8";
+//console.log(t.toString(2))
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function(){
+	var aInput=document.getElementsByTagName("input");
+	var oIframe=document.getElementById("iframe");
+	function changeHeight(){
+		setTimeout(function(){
+			oIframe.height=oIframe.contentWindow.document.body.offsetHeight;
+		},100);
+		
+	}
+	changeHeight();
+	aInput[0].onclick=function(){
+		oIframe.src="iframe2.html";
+		changeHeight();
+	}
+	aInput[1].onclick=function(){
+		oIframe.src="iframe3.html";
+		changeHeight();
+	}
+}
+</script>
+</head>
+
+<body>
+<input type="button" value="按钮1" />
+<input type="button" value="按钮2" />
+<iframe id="iframe" src="iframe2.html" scrolling="no"></iframe>
+</body>
+</html>

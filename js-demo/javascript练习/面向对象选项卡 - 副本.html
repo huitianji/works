@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<style type="text/css">
+	div,body,ul,li{ padding:0px; margin:0px;}
+	.clear{ clear:both;}
+	#box ul{ height:100%; overflow:hidden;}
+	#box ul li { width:80px; height:23px; line-height:23px; float:left; background-color:#ccc; list-style:none;}
+	#box div{ width:240px; height:100px; background-color:#999; display:none;}
+	#box ul li.bg{ background-color:red;}
+</style>
+<div id="box">
+    <ul>
+        <li class="bg">001</li>
+        <li>2222</li>
+        <li>333</li>
+    </ul>
+    <div style="display:block;">
+    001
+    </div>
+    <div>
+    222
+    </div>
+    <div>
+    333
+    </div>
+</div>
+<script>
+	var box=document.getElementById("box");
+	var ul=box.getElementsByTagName("ul")[0];
+	var li=ul.getElementsByTagName("li");
+	var oDiv=box.getElementsByTagName("div");
+	for(var i=0;i<li.length;i++){
+		li[i].index=i;
+		li[i].onclick=function(){
+			for(var i=0;i<li.length;i++){
+				li[i].className="";
+				oDiv[i].style.display="none";
+			}
+			this.className="bg";
+			oDiv[this.index].style.display="block";
+		}
+		
+	}
+</script>
+</body>
+</html>

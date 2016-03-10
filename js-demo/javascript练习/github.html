@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var item,
+         messages,
+        length,
+        i;
+    messages=[{
+        status:"success",
+        message:"This one worked."
+    },{
+        status:"success",
+        message:"This one worked as well."
+    },{
+        status:"error",
+        message:"This one did not work"
+    }];
+    length=messages.length;
+    function index(messages){
+        var item=[];
+        for(i=0;i < length;i++){
+            item[i]=messages[i].message;
+        }
+        return "<ul><li>"+item.join("</li><li>")+"</li></ul>";
+    }
+    //
+    var luke={
+        jedi:"true",
+        age:28
+    };
+
+    function getProp(prop) {
+      return luke[prop];
+    }
+   // var isJedi=getProp("jedi");
+    //console.log(isJedi);
+   // var inputValue = '4';
+    //var val = parseInt(inputValue);
+    var superPower = function superPower() {
+       // console.log('Flying');
+    };
+   // console.log(superPower);
+    var items = [12, 548 , 'a' , 2 , 5478 , 'foo' , 8852, , 'Doe' , 2145 , 119];
+    //console.log(Math.random() * items.length);
+    //console.log(Math.floor(6.908441862137988 ));
+</script>
+</body>
+</html>

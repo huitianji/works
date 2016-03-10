@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+	div,ul,li,body,p{ margin:0px; padding:0px;}
+	li{ list-style:none;}
+	#div1{ width:350px; border:1px solid #ff0000; margin:0px auto; position: relative;}
+	li { width:100px; position: absolute;}
+    li img{ width: 100px; height: 100px;}
+	
+</style>
+
+<script>
+window.onload=function(){
+    var aLi=document.getElementsByTagName("li");
+    var aHeight={l:[],c:[],r:[]};
+    for(var i=0;i<aLi.length;i++){
+        var iNow=i%3;
+        switch(iNow){
+            case 0:
+                aLi[i].style.left="5px";
+                aHeight.l.push(aLi[i].offsetHeight);
+                var step=Math.floor(i/3);
+                if(!step){
+                    aLi[i].style.top=0;
+                }else{
+                    var num=0;
+                    for(var j= 0;j<step;j++){
+                        num +=aHeight.l[j]+5;
+                    }
+                    aLi[i].style.top=num+"px";
+                }
+                break;
+            case 1:
+                aLi[i].style.left="115px";
+                aHeight.c.push(aLi[i].offsetHeight);
+                var step=Math.floor(i/3);
+                if(!step){
+                    aLi[i].style.top=0;
+                }else{
+                    var num=0;
+                    for(var j= 0;j<step;j++){
+                        num +=aHeight.c[j]+5;
+                    }
+                    aLi[i].style.top=num+"px";
+                }
+                break;
+            case 2:
+                aLi[i].style.left="225px";
+                aHeight.r.push(aLi[i].offsetHeight);
+                var step=Math.floor(i/3);
+                if(!step){
+                    aLi[i].style.top=0;
+                }else{
+                    var num=0;
+                    for(var j= 0;j<step;j++){
+                        num +=aHeight.r[j]+5;
+                    }
+                    aLi[i].style.top=num+"px";
+                }
+                break;
+
+        }
+    }
+    //console.log(aHeight);
+}
+</script>
+</head>
+
+<body>
+<div id="div1">
+	<ul>
+    	<li>
+            <img src="images/1.jpg" width="100" height="100" alt=""> 
+
+        </li>
+        <li>
+            <img src="images/2.jpg" width="100" height="100" alt=""> 
+
+        </li>
+        <li>
+            <img src="images/3.jpg" width="100" height="100" alt=""> 
+
+        </li>
+
+    	<li>
+            <img src="images/4.jpg" width="100" height="100" alt="">
+
+        </li>
+        <li>
+            <img src="images/2.jpg" width="100" height="100" alt="">
+
+        </li>
+        <li>
+            <img src="images/3.jpg" width="100" height="100" alt="">
+
+        </li>
+
+    	<li>
+            <img src="images/4.jpg" width="100" height="100" alt="">
+
+        </li>
+        <li>
+            <img src="images/2.jpg" width="100" height="100" alt="">
+
+        </li>
+        <li>
+            <img src="images/3.jpg" width="100" height="100" alt="">
+
+        </li>
+
+    </ul>
+
+</div>
+</body>
+</html>

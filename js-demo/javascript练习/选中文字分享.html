@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+        #div{ width: 10px; height: 10px; background-color: red; position: absolute; display: none;}
+    </style>
+</head>
+<body>
+<div id="div"></div>
+<p id="op">
+    JavaScript 是属于网络的脚本语言！
+    JavaScript 被数百万计的网页用来改进设计、验证表单、检测浏览器、创建cookies，以及更多的应用。
+    JavaScript 是因特网上最流行的脚本语言。
+    JavaScript 很容易使用！你一定会喜欢它的！
+</p>
+<script>
+    //
+    function selectText(){
+        if(document.selection){//ie
+            return document.selection.createRange().text;
+        }else{
+            return window.getSelection().toString();
+        }
+    }
+    //
+    var op=document.getElementById("op");
+    var oDiv=document.getElementById("div");
+    op.onmouseup=function(ev){
+        var ev =ev || window.event;
+        var left = ev.clientX;
+        var top = ev.clientY;
+        if(selectText().length > 10){
+            window.setTimeout(function(){
+                oDiv.style.display = "block";
+                oDiv.style.left = left + "px";
+                oDiv.style.top = top + "px";
+            },100);
+
+        }else{
+            oDiv.style.display = "none";
+        }
+    }
+    op.onclick=function(ev){
+        var ev = ev || window.event;
+        //阻止冒泡
+        ev.cancelBubble = true;
+    }
+    document.onclick = function(){
+        oDiv.style.display = "none";
+    }
+    //跳转
+    oDiv.onclick = function(){
+        window.location.href = "http://www.baidu.com";
+    }
+</script>
+
+</body>
+</html>

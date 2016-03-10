@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+	#div1 { width:100%; text-align:center; position:absolute; bottom:0px;}
+	#div1 img {}
+	
+</style>
+<script>
+	
+	document.onmousemove=function(ev){
+		var oEvent = ev || window.event;
+		var oDiv=document.getElementById("div1");
+		var aTxt=document.getElementsByTagName("input");
+		
+		var aImg=document.getElementsByTagName("img");
+		for(var i=0;i<aImg.length;i++){
+			var x=aImg[i].offsetLeft+aImg[i].offsetWidth/2;
+			var y=aImg[i].offsetTop+oDiv.offsetTop+aImg[i].offsetHeight/2;
+			
+			var a=x-oEvent.clientX;
+			var b=y-oEvent.clientY;
+			
+			var dis=Math.sqrt(a*a+b*b);
+			var scale=1-dis/300;
+			if(scale<0.5){
+				scale=0.5;
+			}
+			aImg[i].width=scale*128;
+			
+			aTxt[i].value=scale.toFixed(2);
+			
+		}
+	}
+</script>
+</head>
+
+<body>
+<input type="text">
+<input type="text">
+<input type="text">
+<input type="text">
+
+<div id="div1">
+    <img src="images/1.jpg" width="60" > 
+    <img src="images/2.jpg" width="60" > 
+    <img src="images/3.jpg" width="60" > 
+    <img src="images/4.jpg" width="60"> 
+</div>
+</body>
+</html>

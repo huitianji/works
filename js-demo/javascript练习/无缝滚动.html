@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+	body,ul,div,li{ margin:0px; padding:0px;}
+	#box{ border:1px solid #000; width:480px; height:120px; margin:10px auto; position:relative; overflow:hidden;}
+	#box ul{ position:absolute; border:0px solid #ff0000;height:120px;}
+	#box ul li{ width:100px; height:120px; float:left; padding:10px; list-style:none;}
+</style>
+<script>
+window.onload=function(){
+	var box=document.getElementById("box");
+	var oUl=box.getElementsByTagName("ul")[0];
+	var oLi=oUl.getElementsByTagName("li");
+	var oA=document.getElementsByTagName("a");
+	oUl.innerHTML+=oUl.innerHTML;
+	oUl.style.width=oLi.length*oLi[0].offsetWidth+"px";
+	var timer=null;
+	var iSpeed=1;
+	function fnMove(){
+		if(oUl.offsetLeft<-oUl.offsetWidth/2){
+			oUl.style.left=0;
+		}else if(oUl.offsetLeft>0){
+			oUl.style.left=-oUl.offsetWidth/2+"px";
+		}
+		oUl.style.left=oUl.offsetLeft+iSpeed+"px";
+	}
+	timer=setInterval(fnMove,30);
+	oA[0].onclick=function(){
+		iSpeed=-10;
+	}
+	oA[1].onclick=function(){
+		iSpeed=10;
+	}
+	
+	box.onmouseover=function(){
+		clearInterval(timer);
+	}
+	box.onmouseout=function(){
+		timer=setInterval(fnMove,30);
+	}
+}
+</script>
+</head>
+
+<body style="border:1px solid #ff0000;">
+<div id="box">
+	<ul>
+    	<li><img src="images/1.jpg" width="100" height="100" alt=""></li>
+        <li><img src="images/2.jpg" width="100" height="100" alt=""></li>
+        <li><img src="images/3.jpg" width="100" height="100" alt=""></li>
+        <li><img src="images/4.jpg" width="100" height="100" alt=""></li>
+    </ul>
+</div>
+<a href="####">向左</a>
+<a href="####">向右</a>
+</body>
+</html>

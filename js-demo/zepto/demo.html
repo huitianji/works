@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <title></title>
+    <script type="text/javascript" src="zepto.js"></script>
+    <style type="text/css">
+        body{
+            background-color: #fff;
+            height: 250px;
+            border: 1px solid red;;
+        }
+        li{
+            line-height: 40px;;
+            list-style: none;
+            color:#fff;
+            border-bottom: 1px solid #fff;;
+
+        }
+        .box{
+            min-height: 20px;
+            background-color:cadetblue;
+        }
+    </style>
+</head>
+<body>
+<div class="box" >
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+
+
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+</div>
+<script>
+$(function(){
+    var h = $(".box").height() - $("body").height();
+    var $objectDom = $(".box");
+    function cssTransform3d(obj,numY){
+        obj.css({'-webkit-transform':"translate3d(0px, "+numY+"px, 0px)",'-webkit-transition':'0.2s ease 0s'})
+    }
+    $(document).on("touchstart",".box",function(event){
+        var _this = $(this);
+        var sY = event.touches[0].clientY;
+        var newSpaceY = sY - _this.offset().top;
+        var newObj;
+        $(document).on("touchmove",".box",function(event){
+            event.preventDefault();
+            var _this = $(this);
+            var endY = event.touches[0].clientY;
+            var y = endY - newSpaceY;
+            newObj = y;
+            $objectDom.parent[0] = y;
+            $objectDom.css({'-webkit-transform':"translate3d(0px, "+y+"px, 0px)",'-webkit-transition':'0s ease 0s'});
+        });
+
+        $(document).on("touchend",".box",function(event){
+            //console.log(objectDom.parent[0])
+            if( newObj == undefined){
+                cssTransform3d($objectDom,$objectDom.parent[0]);
+                //$objectDom.css({'-webkit-transform':"translate3d(0px, "+$objectDom.parent[0]+"px, 0px)",'-webkit-transition':'0.2s ease 0s'})
+            }
+            else if(newObj>-h && newObj < 0){
+                cssTransform3d($objectDom,newObj);
+                //$objectDom.css({'-webkit-transform':"translate3d(0px, "+newObj+"px, 0px)",'-webkit-transition':'0.2s ease 0s'})
+            }
+            else{
+                cssTransform3d($objectDom,0);
+                //$objectDom.css({'-webkit-transform':"translate3d(0px, "+0+"px, 0px)",'-webkit-transition':'0.2s ease 0s'})
+            }
+        });
+    });
+
+
+});
+</script>
+</body>
+</html>

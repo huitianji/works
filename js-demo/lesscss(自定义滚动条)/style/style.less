@@ -1,0 +1,36 @@
+/*公用部分*/
+body{font-size:12px; font-family:"宋体",Verdana, Arial, Helvetica, sans-serif;}
+body,p,div,ul,li,h1,h2,h3{ margin: 0px; padding: 0px;}
+ul li{list-style: none;}
+a { text-decoration:none; color:#4d5479; font-size:12px;}
+a:hover {text-decoration:none;}
+img { border:none;}
+.lt{ float:left;}
+.rt{ float:right;}
+label, input,select{vertical-align:middle; display:inline-block;}
+.clear { width:0px; padding:0px; height:0px; margin:0px; font-size:0px; line-height:0px; clear:both;}
+.cf:before, .cf:after { content:" "; display:table;}.cf:after { clear:both;}.cf { zoom:1;}
+/**/
+.box{
+  width: 400px;height: 150px; margin: 0px auto;
+  border:1px solid black;
+  position: relative;
+}
+.parent{
+  position: absolute; right: 0px; top: 0px;
+  width:20px; background-color: red;
+  height: 150px;
+  .div1{
+    width: 20px; height: 20px; background-color: yellow;
+    cursor: pointer;
+    position: absolute;
+  }
+}
+.content-box{
+  position: relative;
+  width: 300px;height: 150px; overflow:hidden;
+  ul {
+    position: absolute;
+  }
+}
+
